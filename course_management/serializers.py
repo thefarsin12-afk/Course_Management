@@ -20,4 +20,4 @@ class CourseSerailizers(serializers.ModelSerializer):
 
         fields = "__all__"
 
-        read_only_fields = ["id","created_at","updated_at","cover_picture"] 
+        read_only_fields = ["id","created_at","updated_at"] 
