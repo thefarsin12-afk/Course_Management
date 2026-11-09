@@ -45,6 +45,40 @@ class CouserListCreateView(ListCreateAPIView):
 
     pagination_class = CustomLimitOffset
 
+    def get_queryset(self):
+
+        qs = Course.objects.all()
+
+        query_parameters = self.request.query_params
+
+        if "language" in query_parameters:
+
+            language = query_parameters.get("language")
+
+            qs = qs.filter(language__iexact=language)
+
+        if "price" in query_parameters:
+
+            price = query_parameters.get("price") 
+
+            qs = qs.filter(price=price)
+
+        if "trainer" in query_parameters:
+
+            trainer = query_parameters.get("trainer")
+
+            qs = qs.filter(trainer__iexact=trainer) 
+
+        if "title" in query_parameters:
+
+            title = query_parameters.get("title")
+
+            qs = qs.filter(title__icontains=title)    
+
+        return qs    
+
+            
+
 class CourseRetrieveUpdateDeleteView(RetrieveUpdateDestroyAPIView):
 
     authentication_classes = [authentication.BasicAuthentication]
