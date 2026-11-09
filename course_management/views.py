@@ -9,6 +9,7 @@ from rest_framework import authentication,permissions
 from course_management.serializers import RegisterSerializer
 from course_management.serializers import CourseSerailizers
 from course_management.models import Course
+from course_management.pagination import CustomPagination,CustomLimitOffset
 
 
 
@@ -42,6 +43,8 @@ class CouserListCreateView(ListCreateAPIView):
 
     queryset = Course.objects.all()
 
+    pagination_class = CustomLimitOffset
+
 class CourseRetrieveUpdateDeleteView(RetrieveUpdateDestroyAPIView):
 
     authentication_classes = [authentication.BasicAuthentication]
@@ -51,4 +54,5 @@ class CourseRetrieveUpdateDeleteView(RetrieveUpdateDestroyAPIView):
     serializer_class = CourseSerailizers
 
     queryset = Course.objects.all()    
+
 
